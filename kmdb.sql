@@ -130,3 +130,89 @@
 
 -- The SQL statement for the cast output
 -- TODO!
+
+drop table if exists movies;
+drop table if exists studios; 
+drop table if exists actors;
+drop table if exists roles; 
+
+Create table movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    year_released TEXT,
+    MPAA_rating TEXT,
+    studio_id INTEGER 
+);
+
+Create table studios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    studio_name TEXT
+);
+
+create table actors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    actor_name TEXT
+);
+
+create table roles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role_name TEXT,
+    actor_id INTEGER,
+    movie_id INTEGER
+);
+
+insert INTO movies (
+    title, year_released, MPAA_rating, studio_id)
+    values ("Batman begins",2005,"PG 13",1);
+
+insert into studios (
+    studio_name)
+    values ("warner bros");
+
+insert into actors (
+    actor_name)
+    values ('Christian Bale'), 
+  ('Michael Caine'), 
+  ('Liam Neeson'),
+  ('Katie Holmes'),
+  ('Gary Oldman'),
+  ('Heath Ledger'),
+  ('Aaron Eckhart'),
+  ('Maggie Gyllenhaal'),
+  ('Tom Hardy'),
+  ('Joseph Gordon-Levitt'),
+  ('Anne Hathaway');
+
+insert into roles (
+    role_name, actor_id, movie_id)
+values ('Bruce Wayne',1,1), 
+  ('Alfred',2,1), 
+  ("Ra's Al Ghul",3,1),
+  ('Rachel Dawes',4,1),
+  ('Commissioner Gordon',5,1),
+  ('Bruce Wayne',1,2),
+  ('Joker',6,2),
+  ('Harvey Dent',7,2),
+  ('Alfred',2,2),
+  ('Rachel Dawes',8,2),
+  ('Bruce Wayne',1,3),
+  ('Commissioner Gordon',5,3),
+  ('Bane',9,3),
+  ('John Blake',10,3),
+  ('Selina Kyle',11,3);
+
+.print "Movies"
+.print "======"
+.print ""
+
+SELECT movies.title, movies.year_released, movies.MPAA_rating, studios.studio_name 
+from movies INNER JOIN studios ON movies.studio_id = studios.id
+
+.print ""
+.print "Top Cast"
+.print "========"
+.print ""
+
+SELECT movies.title, actors.actor_name, roles.role_name 
+from roles INNER JOIN movies ON movies.id = roles.movie_id INNER JOIN actors ON actors.id = roles.actor_id;
+
