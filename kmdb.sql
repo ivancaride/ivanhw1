@@ -163,7 +163,9 @@ create table roles (
 
 insert INTO movies (
     title, year_released, MPAA_rating, studio_id)
-    values ("Batman begins",2005,"PG 13",1);
+    values ("Batman begins",2005,"PG 13",1),
+      ('The Dark Knight', 2008, 'PG-13',1),
+      ('The Dark Knight Rises', 2012, 'PG-13',1);
 
 insert into studios (
     studio_name)
@@ -171,7 +173,8 @@ insert into studios (
 
 insert into actors (
     actor_name)
-    values ('Christian Bale'), 
+    values 
+  ('Christian Bale'), 
   ('Michael Caine'), 
   ('Liam Neeson'),
   ('Katie Holmes'),
@@ -185,7 +188,8 @@ insert into actors (
 
 insert into roles (
     role_name, actor_id, movie_id)
-values ('Bruce Wayne',1,1), 
+values 
+  ('Bruce Wayne',1,1), 
   ('Alfred',2,1), 
   ("Ra's Al Ghul",3,1),
   ('Rachel Dawes',4,1),
@@ -206,7 +210,7 @@ values ('Bruce Wayne',1,1),
 .print ""
 
 SELECT movies.title, movies.year_released, movies.MPAA_rating, studios.studio_name 
-from movies INNER JOIN studios ON movies.studio_id = studios.id
+from movies INNER JOIN studios ON movies.studio_id = studios.id;
 
 .print ""
 .print "Top Cast"
@@ -214,5 +218,6 @@ from movies INNER JOIN studios ON movies.studio_id = studios.id
 .print ""
 
 SELECT movies.title, actors.actor_name, roles.role_name 
-from roles INNER JOIN movies ON movies.id = roles.movie_id INNER JOIN actors ON actors.id = roles.actor_id;
+from roles INNER JOIN movies ON movies.id = roles.movie_id 
+INNER JOIN actors ON actors.id = roles.actor_id;
 
